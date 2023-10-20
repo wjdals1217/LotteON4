@@ -1,0 +1,51 @@
+<th:block th:insert="~{/cs/_header.html}"/>
+
+      <section id="cs">
+        <div class="notice">
+          <nav>
+            <div>
+              <p th:text="${articles.cate1 == 'notice' ? '홈 > 공지사항':'홈 > 문의하기'}"></p>
+            </div>
+          </nav>
+          <section class="view">
+            <th:block th:insert="~{/cs/_aside.html}"/>
+            <article>
+              <nav>
+                <h2 class="title" th:text="${articles.title}">[안내] 해외결제 사칭 문자 주의</h2>
+                <span class="date" th:text="${articles.rdate.toLocalDate()}">2022.11.20</span>
+              </nav>
+
+              <div class="content">
+                <p th:text="${articles.content}"></p>
+              </div>
+
+              <th:block th:if="${cate1=='qna' && comment != null}">
+                <div class="qnaView">
+                  <nav class="title" th:text="'[답변]'+${comment.title}"></nav>
+                  <div>
+                    <p>
+                      [[${comment.content}]]
+                    </p>
+                  </div>
+
+              </th:block>
+              <th:block th:if="${articles.cate1=='notice' || articles.cate1=='qna'}">
+                <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${cate2})}" class="btnList">목록보기</a>
+              </th:block>
+              <th:block th:if="${articles.cate1=='faq'}">
+                <a th:href="@{/cs/faq/list(cate1=${articles.cate1},cate2=${articles.cate2})}" class="btnList">목록보기</a>
+              </th:block>
+              <th:blcok th:if="${articles.cate1=='qna'}">
+                <th:block sec:authorize="isAuthenticated()">
+
+                  <th:block th:if="${#authentication.principal.member.uid == articles.writer}">
+                    <a th:href="@{/cs/qna/modify(cate1=${cate1},cate2=all,no=${articles.no})}" class="btnList">수정하기</a>
+                    <a th:href="@{/cs/delete(no=${articles.no},cate1=${cate1},cate2=${articles.cate2})}" class="btnList">삭제하기</a>
+                  </th:block>
+                </th:block>
+              </th:blcok>
+            </article>
+          </section>
+        </div>
+      </section>
+<th:block th:insert="~{/cs/_footer.html}"/>

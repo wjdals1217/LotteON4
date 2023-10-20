@@ -1,0 +1,38 @@
+<th:block th:insert="~{/admin/_header.html}"/>
+<th:block th:insert="~{/admin/_aside.html}"/>
+        <section id="admin-cs-notice-view">
+            <nav>
+                <h3>공지사항 보기</h3>
+                <p>
+                    HOME &gt; 고객센터 &gt; <strong>공지사항</strong>
+                </p>
+            </nav>
+            <nav></nav>
+            <article>
+                <div class="content">
+                    <table>
+                        <tr>
+                            <td>유형</td>
+                            <td>[[${view.cate2}]]</td>
+                        </tr>
+                        <tr>
+                            <td>제목</td>
+                            <td>[[${view.title}]]</td>
+                        </tr>
+                        <tr>
+                            <td>내용</td>
+                            <td>
+                                [[${view.content}]]
+                            </td>
+                        </tr>
+                  </table>
+                </div>
+                <a th:href="@{/admin/cs/notice/list}" class="btnList">목록</a>
+                <a th:href="@{/admin/cs/notice/modify}" class="btnModify">수정</a>
+                <a href="#" class="btnDelete">삭제</a>
+            </article>
+        </section>
+    </div>
+</section>
+    </main>
+<th:block th:insert="~{/admin/_footer.html}"/>

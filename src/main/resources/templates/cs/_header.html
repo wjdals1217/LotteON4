@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.thymeleaf.org/"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+
+        lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>롯데ON::고객센터</title>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/cs/favicon.ico}" />
+    <link rel="stylesheet" th:href="@{/css/cs/style.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      function afterLogin() {
+        if(confirm('로그인후 작성해주세요')){
+          window.location.href = '/LotteON/member/login';
+        }else{
+          window.location.href='/LotteON/cs/index';
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <div class="top">
+          <div>
+            <p>
+            <th:block sec:authorize="isAnonymous()">
+              <a th:href="@{/}">메인</a>
+              <a th:href="@{/member/login}">로그인</a>
+              <a th:href="@{/member/join}">회원가입</a>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+              <a href="#" >[[${#authentication.principal.member.name}]]</a>
+              <th:block sec:authorize="hasRole('1')">
+                <a href="#">마이페이지</a>
+              </th:block>
+              <th:block sec:authorize="hasAnyRole('2','3')" >
+                <a th:href="@{/admin/index}">관리자</a>
+              </th:block>
+              <a th:href="@{/member/logout}">로그아웃</a>
+              <a href="#">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;
+                장바구니
+              </a>
+            </th:block>
+            </p>
+          </div>
+        </div>
+        <div class="logo">
+          <div>
+            <a th:href="@{/cs/index}"><img th:src="@{/images/main/header_logo.png}" alt="로고" />고객센터</a>
+          </div>
+        </div>
+      </header>
+
