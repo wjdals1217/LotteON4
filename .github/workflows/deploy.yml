@@ -37,6 +37,7 @@ jobs:
       - name: add Application.yml
         run: touch ./src/main/resources/application.yml
         shell: bash
+
         
       # properties 파일일 경우
       #- name: copy Application.properties
